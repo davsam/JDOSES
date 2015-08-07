@@ -1,0 +1,101 @@
+<div class="col-sm-4 col-sm-offset-4" style="margin-top:70px; margin-bottom:20px">
+<center><h2>Data pasien</h2></center>
+<form name="userForm" class="form-signin">
+    <h3 class="form-group" class="form-signin-heading">Silakan input data pasien</h3>
+    
+    <div  class="form-group" ng-class="{'has-error': userForm.inputID.$dirty}">
+    	<label for="patientName" class="">Nama</label>
+    	<input type="text" name="patientName" id="patientName" class="form-control" placeholder="John Doe" ng-model="user.patientName" required autofocus >
+    	 <small class="help-block" 
+                 ng-show="userForm.patientName.$error.required">diperlukan</small>
+    </div>
+
+    <div class="form-group">
+        <label class="" for="gender">Gender</label>
+        <div class="">
+            <label class=" inline" for="male">
+                <input type="radio" name="gender" ng-model="user.gender" id="male" value="male" required>
+                Laki-laki
+            </label>
+            <label class=" inline" for="female" style="margin-left:15px">
+                <input type="radio" name="gender" ng-model="user.gender" id="female" value="female" required>
+                Perempuan
+            </label>
+        </div>
+        <small class="help-block" 
+                 ng-show="userForm.gender.$error.required">diperlukan</small>
+    </div>
+
+    <div class="form-group" ng-class="{error: userForm.dob.$invalid && !userForm.dob.$pristine}">
+	    <label class="control-label" for="dob">Tanggal Lahir</label>
+	    <div class="input-group">
+	         <input name="dob"  id="dob" type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" max-date="datepicker.maxDate" ng-model="datepicker.pickedDate" is-open="datepicker.opened" datepicker-options="datepicker.dateOptions" close-text="Close" required/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+	    </div>
+	    <small class="help-block" 
+                 ng-show="userForm.dob.$error.required">diperlukan</small>
+	</div>
+    
+
+	 <div class="form-group">
+        <label class="control-label" for="city">Kota Administrasi</label>
+        <div class="">
+            <select id="city" ng-model="patient.city" name="city" class="form-control" ng-options="v for v in cities">
+            	<option value="" style="display:none;"></option>
+            </select>
+             <small class="help-block" 
+                 ng-show="userForm.city.$error.required">diperlukan</small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="district">Kecamatan</label>
+        <div class="">
+            <select id="district" ng-model="patient.district" name="district" class="form-control" ng-options="v for v in districts" required>
+            	<option value="" style="display:none;"></option>
+            </select>
+            <small class="help-block" 
+                 ng-show="userForm.district.$error.required">diperlukan</small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="address">Alamat</label>
+        <div class="">
+           <textarea type="text" name="address" class="form-control" placeholder="Jl. Kesetiaan 1 " ng-model="patient.address" required></textarea>
+        </div>
+        <small class="help-block" 
+                 ng-show="userForm.address.$error.required">diperlukan</small>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="postalcode">Kode Pos</label>
+        <div class="">
+            <select id="postalcode" ng-model="user.postalcode" name="postalcode" class="form-control" ng-options="v for v in postalcode" required>
+            	<option value="" style="display:none;"></option>
+            </select>
+            <small class="help-block" 
+                 ng-show="userForm.postalcode.$error.required">diperlukan</small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="disease">Terjangkit penyakit</label>
+        <div class="">
+            <select id="disease" ng-model="user.disease" name="disease" class="form-control" ng-options="v for v in diseases" required>
+            	<option value="" style="display:none;"></option>
+            </select>
+            <small class="help-block" 
+                 ng-show="userForm.disease.$error.required">diperlukan</small>
+        </div>
+    </div>
+
+
+    <button class="btn btn-lg btn-primary btn-block" ng-disabled="userForm.$invalid" ng-click="signinWithLogoutCheckFirst()">Simpan Data</button>
+ </form>
+ 
+ <!--<div ng-show='false' ng-model="info.loginfirst">{{'LOGIN_FIRST' | translate}}</div>-->
+</div>
+
