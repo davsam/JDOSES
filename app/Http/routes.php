@@ -15,10 +15,18 @@
     return view('welcome');
 });*/
 
+Route::get('/', function () {
+    return view('dashboard');
+});
+
 Route::get('/form', function () {
     return view('form');
 });
 
-Route::get('/dashboard', function () {
+Route::get('/patients', function () {
     return view('dashboard');
 });
+
+Route::get('/monthly', 'PatientsController@monthly');
+
+Route::resource('patient', 'PatientsController');

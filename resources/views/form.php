@@ -10,9 +10,9 @@
         <base href="/form">
         <link rel="icon" href="/favicon.png">
         
-        <link rel="stylesheet" href="/css/style.css">
+        <!--<link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/sb-admin.css">
-        <link rel="stylesheet" href="/css/employee_login.css">  
+        <link rel="stylesheet" href="/css/employee_login.css">-->
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="/bower_components/angular-loading-bar/src/loading-bar.css">
         <link rel="stylesheet" href="/bower_components/angular-ui-notification/dist/angular-ui-notification.min.css">
@@ -90,11 +90,12 @@
     <script type="text/javascript" src="/bower_components/angular-loading-bar/src/loading-bar.js"></script>
     <script type="text/javascript" src="/bower_components/angular-ui-notification/dist/angular-ui-notification.min.js"></script>
     <script type="text/javascript" src="/bower_components/moment/moment.js"></script>
+    <script type="text/javascript" src="/bower_components/moment/locale/id.js"></script>
     <!--<script type="text/javascript" src="/bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
     <script type="text/javascript" src="/bower_components/angular-translate/angular-translate.min.js"></script>
     <script type="text/javascript" src="/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
     
-    <script type="text/javascript" src="/bower_components/moment/locale/id.js"></script>
+    
     <script type="text/javascript" src="/bower_components/lodash/dist/lodash.min.js"></script>
     <script type="text/javascript" src="/bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
     <script type="text/javascript" src="/scripts/config/Chart.min.js"></script>
@@ -103,6 +104,9 @@
     <!-- Application Scripts -->
     <script type="text/javascript" src="/scripts/form.js"></script>
     <script type="text/javascript" src="/scripts/controllers/PatientFormController.js"></script>
+
+    <script type="text/javascript" src="/scripts/services/modal.js"></script>
+    <script type="text/javascript" src="/scripts/services/patient.js"></script>
     <!--<script type="text/javascript" src="/scripts/controllers/admin/EmployeesController.js"></script>
     <script type="text/javascript" src="/scripts/controllers/admin/EmployeeDetailController.js"></script>
     <script type="text/javascript" src="/scripts/controllers/admin/GatesController.js"></script>

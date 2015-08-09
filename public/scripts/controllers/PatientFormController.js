@@ -8,19 +8,22 @@
                                                             $window,
                                                             $modal,
                                                             $routeParams,
-                                                            $location
+                                                            $location,
+                                                            modalService,
+                                                            patient,
+                                                            Notification
                                                             /*$translate
                                                             localStorageService,
-                                                            Notification,
+                                                            
                                                             adminLogin,
-                                                            modalService,
+                                                            
                                                             location*/){
         //initialization
         init();
         function init(){
             $scope.patient = [];
             $scope.patient.city = "Jakarta Barat";
-            
+            $scope.patient.dob = new Date();
             $scope.cities = ["Jakarta Barat",
                                 "Jakarta Pusat",
                                 "Jakarta Selatan",
@@ -263,8 +266,8 @@
 
             $scope.datepicker = [];
             $scope.datepicker.pickedDate = new Date();
-            $scope.datepicker.pickedDateText =  moment($scope.datepicker.pickedDate).locale("id").format('dddd, Do MMMM YYYY');
-            $scope.datepicker.maxDate = moment($scope.datepicker.pickedDate);
+            $scope.datepicker.pickedDateText =  moment($scope.patient.dob).locale("id").format('dddd, Do MMMM YYYY');
+            $scope.datepicker.maxDate = moment($scope.patient.dob);
             $scope.datepicker.dateOptions = {
                 formatYear: 'yy',
                 startingDay: 1
@@ -279,53 +282,49 @@
             $scope.datepicker.opened = true;
         }
 
-        /*function signin() {
-            //check if there is already logged-in user
-
-            adminLogin.login({
-                    "email":$scope.user.email,
-                    "password":$scope.user.password
-                }).then(function(success) {
-                    console.log("nih success " +success);
-                    if (localStorageService.get("token")) {
-                        if(localStorageService.get("user")){
-                            console.log(localStorageService.get("user")['code']);
-                            //getAllLocations();
-                        }
-                        $location.path("dashboard");
-                    } else{
-                        Notification.error({message: $translate.instant(success.info), delay: 3000});
-                        $scope.user.password = "";
-                    }
-                }, function(error) {
-                    console.log(error);
-                });
-        }
-
-        function getAllLocations(){
-            location.queryLocation({
-                                code_company: localStorageService.get("user")['code']
-                                }).then(function(results){
-                console.log (results);
-                localStorageService.set("locations", results);
-
-            },function(error){
-                console.log(error);
-            });
-        }
-
-         $scope.signinWithLogoutCheckFirst = function() {
-            if(localStorageService.get('token')){
-               adminLogin.logout().then(function(results){
-                    signin();
-                },function(error){
-                    console.log(error);
-                });
-            }else{
-                signin();
-            }
+        $scope.saveData = function(patientObj) {
             
-        };*/
+            var modalInstance = $modal.open({
+                templateUrl: '/template/confirmation_modal.html',
+                controller: $scope.model,
+                resolve: {
+                    patientObj: function() {
+                        return patientObj;
+                    }
+                }
+            });
+        };
+
+        $scope.model = function(patientObj, $modalInstance, $scope){
+            
+            $scope.patient = patientObj;
+            $scope.patient.dobText = moment($scope.patient.dob).locale("id").format('Do MMMM YYYY');
+            $scope.patient.age = moment($scope.patient.dob).fromNow().split(" ")[0];
+
+            $scope.save = function(){
+                patient.savePatient({
+                                    name: $scope.patient.name,
+                                    gender: $scope.patient.gender,
+                                    dob: $scope.patient.dob,
+                                    age: $scope.patient.age,
+                                    city: $scope.patient.city,
+                                    district: $scope.patient.district,
+                                    address: $scope.patient.address,
+                                    postalcode: $scope.patient.postalcode,
+                                    disease: $scope.patient.disease
+                }).then(function(success){
+                    console.log(success);
+                    Notification.primary("Data sukses disimpan");
+                    $modalInstance.dismiss('cancel');
+                }, function(error){
+                    console.log(error);
+                });
+            };
+
+            $scope.cancel = function(){
+                $modalInstance.dismiss('cancel');
+            };
+        }
     });
 
 })();

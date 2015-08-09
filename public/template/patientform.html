@@ -5,7 +5,7 @@
     
     <div  class="form-group" ng-class="{'has-error': userForm.inputID.$dirty}">
     	<label for="patientName" class="">Nama</label>
-    	<input type="text" name="patientName" id="patientName" class="form-control" placeholder="John Doe" ng-model="user.patientName" required autofocus >
+    	<input type="text" name="patientName" id="patientName" class="form-control" placeholder="John Doe" ng-model="patient.name" required autofocus >
     	 <small class="help-block" 
                  ng-show="userForm.patientName.$error.required">diperlukan</small>
     </div>
@@ -14,11 +14,11 @@
         <label class="" for="gender">Gender</label>
         <div class="">
             <label class=" inline" for="male">
-                <input type="radio" name="gender" ng-model="user.gender" id="male" value="male" required>
+                <input type="radio" name="gender" ng-model="patient.gender" id="male" value="Laki-laki" required>
                 Laki-laki
             </label>
             <label class=" inline" for="female" style="margin-left:15px">
-                <input type="radio" name="gender" ng-model="user.gender" id="female" value="female" required>
+                <input type="radio" name="gender" ng-model="patient.gender" id="female" value="Perempuan" required>
                 Perempuan
             </label>
         </div>
@@ -29,7 +29,7 @@
     <div class="form-group" ng-class="{error: userForm.dob.$invalid && !userForm.dob.$pristine}">
 	    <label class="control-label" for="dob">Tanggal Lahir</label>
 	    <div class="input-group">
-	         <input name="dob"  id="dob" type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" max-date="datepicker.maxDate" ng-model="datepicker.pickedDate" is-open="datepicker.opened" datepicker-options="datepicker.dateOptions" close-text="Close" required/>
+	         <input name="dob"  id="dob" type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" max-date="datepicker.maxDate" ng-model="patient.dob" is-open="datepicker.opened" datepicker-options="datepicker.dateOptions" close-text="Close" required/>
             <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="openDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
@@ -73,7 +73,7 @@
     <div class="form-group">
         <label class="control-label" for="postalcode">Kode Pos</label>
         <div class="">
-            <select id="postalcode" ng-model="user.postalcode" name="postalcode" class="form-control" ng-options="v for v in postalcode" required>
+            <select id="postalcode" ng-model="patient.postalcode" name="postalcode" class="form-control" ng-options="v for v in postalcode" required>
             	<option value="" style="display:none;"></option>
             </select>
             <small class="help-block" 
@@ -84,7 +84,7 @@
     <div class="form-group">
         <label class="control-label" for="disease">Terjangkit penyakit</label>
         <div class="">
-            <select id="disease" ng-model="user.disease" name="disease" class="form-control" ng-options="v for v in diseases" required>
+            <select id="disease" ng-model="patient.disease" name="disease" class="form-control" ng-options="v for v in diseases" required>
             	<option value="" style="display:none;"></option>
             </select>
             <small class="help-block" 
@@ -93,7 +93,7 @@
     </div>
 
 
-    <button class="btn btn-lg btn-primary btn-block" ng-disabled="userForm.$invalid" ng-click="signinWithLogoutCheckFirst()">Simpan Data</button>
+    <button class="btn btn-lg btn-primary btn-block" ng-disabled="userForm.$invalid" ng-click="saveData(patient)">Simpan Data</button>
  </form>
  
  <!--<div ng-show='false' ng-model="info.loginfirst">{{'LOGIN_FIRST' | translate}}</div>-->
